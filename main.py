@@ -8,31 +8,77 @@ cur = sqlconnection.cursor()
 winnerslist = []
 tieslist = []
 loserslist = []
-bankrolldata = []
-game = Game(8, 1, 'counter')
+bankrolldatarandom = []
+bankrolldatabasic = []
+bankrolldatacounter = []
+gamer = Game(8, 1, 'random')
 for k in range(100):
     for j in range(12):
         for i in range(30):
-            game.initialdeal()
-            game.moves()
-            winners, ties, losers = game.tallyscore()
-            bankrolldata.append(game.players['Alex'].bankroll)
+            gamer.initialdeal()
+            gamer.moves()
+            winners, ties, losers = gamer.tallyscore()
+            bankrolldatarandom.append(gamer.players['Alex'].bankroll)
             if winners:
                 winnerslist.append(winners)
             if ties:
                 tieslist.append(ties)
             if losers:
                 loserslist.append(losers)
-            game.endround()
-        game.endsession()
+            gamer.endround()
+        gamer.endsession()
 
-print("\n\nBankroll Totals: ", game.bankrolltotals())
-print("Number of wins: ", len(winnerslist))
-print("Number of ties: ", len(tieslist))
-print("Number of losses: ", len(loserslist))
+gameb = Game(8, 1, 'basic')
+for k in range(100):
+    for j in range(12):
+        for i in range(30):
+            gameb.initialdeal()
+            gameb.moves()
+            winners, ties, losers = gameb.tallyscore()
+            bankrolldatabasic.append(gameb.players['Alex'].bankroll)
+            if winners:
+                winnerslist.append(winners)
+            if ties:
+                tieslist.append(ties)
+            if losers:
+                loserslist.append(losers)
+            gameb.endround()
+        gameb.endsession()
+
+gamec = Game(8, 1, 'counter')
+for k in range(100):
+    for j in range(12):
+        for i in range(30):
+            gamec.initialdeal()
+            gamec.moves()
+            winners, ties, losers = gamec.tallyscore()
+            bankrolldatacounter.append(gamec.players['Alex'].bankroll)
+            if winners:
+                winnerslist.append(winners)
+            if ties:
+                tieslist.append(ties)
+            if losers:
+                loserslist.append(losers)
+            gamec.endround()
+        gamec.endsession()
+
 #plot bankroll over time
-plt.plot(bankrolldata)
-plt.title('Bankroll over time, random strategy, random betting (1 session)')
+plt.plot(bankrolldatarandom)
+plt.title('Bankroll over time, random strategy, random betting (100 sessions)')
+plt.ylabel('Dollars')
+plt.xlabel('Hands Played')
+plt.show()
+
+#plot bankroll over time
+plt.plot(bankrolldatabasic)
+plt.title('Bankroll over time, basic strategy, minimum betting (100 sessions)')
+plt.ylabel('Dollars')
+plt.xlabel('Hands Played')
+plt.show()
+
+#plot bankroll over time
+plt.plot(bankrolldatacounter)
+plt.title('Bankroll over time, basic strategy, with bet spread (100 sessions)')
 plt.ylabel('Dollars')
 plt.xlabel('Hands Played')
 plt.show()
