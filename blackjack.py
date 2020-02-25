@@ -328,24 +328,3 @@ class Game:
         self.playedcards = []
         self.deck = Shoe(6)
         self.deck.shuffle()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
